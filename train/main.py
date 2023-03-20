@@ -17,7 +17,7 @@ def main(args):
                         framework_version="1.8.0",
                         py_version="py3",
                         train_instance_count=1,
-                        train_instance_type="ml.c5.xlarge", # ml.p2.xlarge
+                        train_instance_type=args.train_instance_type, # ml.c5.xlarge, ml.p2.xlarge
                         hyperparameters={
                             "epochs": args.epochs,
                             "backend": "gloo"
@@ -34,6 +34,7 @@ if __name__ == "__main__":
                         help='number of epochs to train (default: 5)')
     
     # Container environment
+    parser.add_argument('--train-instance-type', type=str, default='ml.c5.xlarge')
     parser.add_argument('--data-dir', type=str, default="s3://sagemaker-pytorch-metal/data/")
 
     main(parser.parse_args())
